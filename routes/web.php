@@ -13,6 +13,14 @@ Route::get('/keep/create', [KeepController::class, 'create'])->name('keep.create
 
 Route::post('/keep/create', [KeepController::class, 'create']);
 
+Route::get('/keep/edit/{nota}', [KeepController::class, 'edit'])->name('keep.edit');
+
+Route::put('/keep/edit/{nota}', [KeepController::class, 'edit']);
+
+Route::get('/keep/delete/{nota}', [KeepController::class, 'delete'])->name('keep.delete');
+
+Route::delete('/keep/delete/{nota}', [KeepController::class, 'delete']);
+
 
 // Route::get('/hello', function() {
 //     return 'Hello world :-)';
