@@ -3,6 +3,7 @@
 @section('conteudo')
     <p>Bem-vindo ao Little Keep!</p>
     <p><a href="{{ @route('keep.create') }}">Adicionar nota</a></p>
+    <p><a href="{{ @route('keep.trash') }}">🚮 Lixeira</a></p>
     <hr>
     
     @if (session('mensagem'))
@@ -10,10 +11,16 @@
     @endif
 
     @foreach ($notas as $nota)
-        <div style="border:1px solid; background-color: {{ $nota['cor'] }};padding:2px">
+        <div style="border:1px solid; background-color: {{ $nota['cor'] }};padding:2px;width:200px;display:inline-block;margin:5px;">
             {{ $nota['nota'] }}
             <br><br>
-            {{ \Carbon\Carbon::parse($nota['created_at'])->diffForHumans() }}
+            Criada: {{ \Carbon\Carbon::parse($nota['created_at'])->diffForHumans() }}
+
+            @if ($nota['created_at'] != $nota['updated_at'])
+                <br>
+                Editada: {{ \Carbon\Carbon::parse($nota['updated_at'])->diffForHumans() }}
+            @endif
+
             <br>
             <a href="{{ route('keep.edit', $nota['id']) }}">📝</a>
             <a href="{{ route('keep.delete', $nota['id']) }}">❌</a>
